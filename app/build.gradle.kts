@@ -39,6 +39,8 @@ android {
 
 dependencies {
 
+    val navigationVersion = "2.5.3"
+
     implementation ("androidx.core:core-ktx:1.8.0")
     implementation ("androidx.appcompat:appcompat:1.4.1")
     implementation ("com.google.android.material:material:1.5.0")
@@ -50,6 +52,11 @@ dependencies {
     //hilt
     implementation ("com.google.dagger:hilt-android:2.44")
     kapt ("com.google.dagger:hilt-compiler:2.44")
+
+    //navigation
+    implementation ("androidx.navigation:navigation-fragment-ktx:$navigationVersion")
+    implementation ("androidx.navigation:navigation-ui-ktx:$navigationVersion")
+
 }
 
 kapt {
