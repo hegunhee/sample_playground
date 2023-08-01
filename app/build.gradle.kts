@@ -41,6 +41,7 @@ dependencies {
 
     val hiltVersion = "2.44"
     val navigationVersion = "2.5.3"
+    val lifecycleScopeVersion = "2.4.0"
 
     implementation ("androidx.core:core-ktx:1.8.0")
     implementation ("androidx.appcompat:appcompat:1.4.1")
@@ -58,6 +59,9 @@ dependencies {
     implementation ("androidx.navigation:navigation-fragment-ktx:$navigationVersion")
     implementation ("androidx.navigation:navigation-ui-ktx:$navigationVersion")
 
+    //lifecycleScope
+    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleScopeVersion")
+    implementation ("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleScopeVersion")
 }
 
 kapt {
