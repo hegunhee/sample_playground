@@ -39,6 +39,7 @@ android {
 
 dependencies {
 
+    val hiltVersion = "2.44"
     val navigationVersion = "2.5.3"
 
     implementation ("androidx.core:core-ktx:1.8.0")
@@ -50,8 +51,8 @@ dependencies {
     androidTestImplementation ("androidx.test.espresso:espresso-core:3.4.0")
 
     //hilt
-    implementation ("com.google.dagger:hilt-android:2.44")
-    kapt ("com.google.dagger:hilt-compiler:2.44")
+    implementation ("com.google.dagger:hilt-android:$hiltVersion")
+    kapt ("com.google.dagger:hilt-compiler:$hiltVersion")
 
     //navigation
     implementation ("androidx.navigation:navigation-fragment-ktx:$navigationVersion")
