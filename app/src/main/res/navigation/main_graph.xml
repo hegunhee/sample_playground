@@ -7,5 +7,19 @@
     <fragment
         android:id="@+id/main"
         android:name="com.hegunhee.sample_playground.feature.main.MainFragment"
-        android:label="MainFragment" />
+        android:label="MainFragment" >
+
+        <action
+            android:id="@+id/action_main_to_security"
+            app:destination="@id/security" />
+        .
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/security"
+        android:name="com.hegunhee.sample_playground.feature.secretkeypad.SecurityKeypadFragment"
+        android:label="SecurityKeypadFragment" />
+
+
 </navigation>
