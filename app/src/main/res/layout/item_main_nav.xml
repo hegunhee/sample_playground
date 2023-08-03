@@ -18,14 +18,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="@{() -> actionHandler.onClickNavItem(navItem.actionId)}"
-        android:padding="10dp">
+        android:padding="@dimen/recycler_view_item_padding">
 
         <TextView
             android:id="@+id/name"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="wrap_content"
             android:gravity="center|start"
             android:text="@{navItem.name}"
+            android:textSize="@dimen/middle_text_size"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
