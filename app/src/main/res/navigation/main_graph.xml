@@ -19,7 +19,7 @@
     <fragment
         android:id="@+id/security"
         android:name="com.hegunhee.sample_playground.feature.secretkeypad.SecurityKeypadFragment"
-        android:label="SecurityKeypadFragment" />
+        android:label="@string/security_keypad" />
 
 
 </navigation>
