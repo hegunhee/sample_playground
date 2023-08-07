@@ -33,6 +33,7 @@ class KeypadBottomSheetDialogFragment(val keypadType : KeypadType) : BottomSheet
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        keypadAdapter.submitList(listOf<String>("1","2","3","4","5","6","7","8","9","0").shuffled())
     }
 
     companion object {
