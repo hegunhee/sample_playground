@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <dimen name="recycler_view_item_padding">10dp</dimen>
+    <dimen name="middle_padding">10dp</dimen>
+    <dimen name="recycler_view_item_padding">@dimen/middle_padding</dimen>
+    <dimen name="big_margin">30dp</dimen>
 
+    <dimen name="big_text_size">30sp</dimen>
     <dimen name="middle_text_size">20sp</dimen>
 </resources>
