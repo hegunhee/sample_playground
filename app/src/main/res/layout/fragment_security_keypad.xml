@@ -18,15 +18,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/fragmentTestText"
+        <Button
+            android:id="@+id/password_register_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
+            android:padding="10dp"
+            android:text="@string/password_register"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:text="FragmentSecretKeypad"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/toolbar"
+            android:textSize="@dimen/middle_text_size"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
