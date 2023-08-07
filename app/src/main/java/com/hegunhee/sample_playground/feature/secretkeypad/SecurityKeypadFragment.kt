@@ -6,11 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.hegunhee.sample_playground.R
 import com.hegunhee.sample_playground.databinding.FragmentSecurityKeypadBinding
+import com.hegunhee.sample_playground.feature.secretkeypad.dialog.KeypadBottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class SecurityKeypadFragment : Fragment() {
@@ -33,5 +38,26 @@ class SecurityKeypadFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewDataBinding.toolbar.setupWithNavController(findNavController())
+        observeData()
     }
+
+    private fun observeData() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                launch {
+                    viewModel.keypadNavigation.collect{ type ->
+                        when(type) {
+                            is KeypadType.Register ->{
+                                KeypadBottomSheetDialogFragment.getInstance(type).show(parentFragmentManager, KeypadBottomSheetDialogFragment.TAG_REGISTER)
+                            }
+                            is KeypadType.Check -> {
+
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
 }
