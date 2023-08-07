@@ -29,8 +29,8 @@ class KeypadBottomSheetDialogFragment(val keypadType : KeypadType) : BottomSheet
         const val TAG_REGISTER = "register"
         const val TAG_CHECK = "check"
 
-        fun getRegisterTypeInstance() : KeypadBottomSheetDialogFragment {
-            return KeypadBottomSheetDialogFragment(KeypadType.Register())
+        fun getInstance(type : KeypadType) : KeypadBottomSheetDialogFragment {
+            return KeypadBottomSheetDialogFragment(keypadType = type)
         }
     }
 }
