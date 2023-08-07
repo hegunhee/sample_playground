@@ -4,6 +4,10 @@
 
     <data>
 
+        <variable
+            name="viewModel"
+            type="com.hegunhee.sample_playground.feature.secretkeypad.SecurityKeypadViewModel" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
