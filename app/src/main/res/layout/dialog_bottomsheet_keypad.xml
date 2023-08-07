@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -19,7 +20,33 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:textSize="@dimen/middle_text_size" />
+            android:textSize="@dimen/big_text_size" />
+
+        <TextView
+            android:id="@+id/password_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/keypad_title"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="@dimen/big_margin"
+            android:layout_marginBottom="@dimen/big_margin"
+            android:padding="@dimen/middle_padding"
+            android:gravity="center"
+            tools:text="341892"
+            android:textSize="20sp" />
+
+        <ImageView
+            android:id="@+id/clear_password_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_clear_24"
+            android:padding="@dimen/middle_padding"
+            app:layout_constraintTop_toTopOf="@id/password_text"
+            app:layout_constraintBottom_toBottomOf="@id/password_text"
+            app:layout_constraintStart_toEndOf="@id/password_text"
+            />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
