@@ -4,17 +4,23 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.hegunhee.sample_playground.R
 import com.hegunhee.sample_playground.databinding.DialogBottomsheetKeypadBinding
 import com.hegunhee.sample_playground.feature.secretkeypad.KeypadAdapter
 import com.hegunhee.sample_playground.feature.secretkeypad.KeypadType
+import kotlinx.coroutines.launch
 
 class KeypadBottomSheetDialogFragment(val keypadType : KeypadType) : BottomSheetDialogFragment(){
 
     private lateinit var viewDataBinding : DialogBottomsheetKeypadBinding
     private lateinit var keypadAdapter : KeypadAdapter
+    private val viewModel : KeypadViewModel by viewModels()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -33,7 +39,20 @@ class KeypadBottomSheetDialogFragment(val keypadType : KeypadType) : BottomSheet
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        keypadAdapter.submitList(listOf<String>("1","2","3","4","5","6","7","8","9","0").shuffled())
+        observeData()
+        viewModel.fetchKeypad()
+    }
+
+    private fun observeData() {
+        viewLifecycleOwner.lifecycleScope.launch{
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                launch {
+                    viewModel.keypad.collect { keypad ->
+                        keypadAdapter.submitList(keypad)
+                    }
+                }
+            }
+        }
     }
 
     companion object {
