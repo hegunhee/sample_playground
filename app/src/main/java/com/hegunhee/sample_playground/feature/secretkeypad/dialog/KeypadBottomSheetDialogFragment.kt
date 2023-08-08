@@ -26,9 +26,10 @@ class KeypadBottomSheetDialogFragment(val keypadType : KeypadType) : BottomSheet
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        keypadAdapter = KeypadAdapter()
+        keypadAdapter = KeypadAdapter(viewModel)
         val root = inflater.inflate(R.layout.dialog_bottomsheet_keypad,container,false)
         viewDataBinding = DialogBottomsheetKeypadBinding.bind(root).apply {
+            viewModel = this@KeypadBottomSheetDialogFragment.viewModel
             lifecycleOwner = viewLifecycleOwner
             keypadRecyclerView.apply {
                 layoutManager = GridLayoutManager(requireContext(),3)
@@ -40,7 +41,7 @@ class KeypadBottomSheetDialogFragment(val keypadType : KeypadType) : BottomSheet
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         observeData()
-        viewModel.fetchKeypad()
+        viewModel.fetchData()
     }
 
     private fun observeData() {

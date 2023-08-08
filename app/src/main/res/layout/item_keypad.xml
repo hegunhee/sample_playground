@@ -7,11 +7,16 @@
         <variable
             name="keypadText"
             type="java.lang.String" />
+
+        <variable
+            name="actionHandler"
+            type="com.hegunhee.sample_playground.feature.secretkeypad.dialog.KeypadActionHandler" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="@{() -> actionHandler.onClickKeypad(keypadText)}">
 
         <TextView
             android:id="@+id/keypad"
@@ -20,6 +25,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:text="@{keypadText}"
+            android:gravity="center_horizontal"
             android:textSize="@dimen/big_text_size"
             tools:text="12"/>
 
