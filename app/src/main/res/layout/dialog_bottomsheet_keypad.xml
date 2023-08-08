@@ -9,6 +9,8 @@
             name="viewModel"
             type="com.hegunhee.sample_playground.feature.secretkeypad.dialog.KeypadViewModel" />
 
+        <import type="android.view.View"/>
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -50,6 +52,7 @@
             android:padding="@dimen/middle_padding"
             android:src="@drawable/ic_clear_24"
             app:layout_constraintBottom_toBottomOf="@id/password_text"
+            android:visibility="@{viewModel.password.empty ? View.INVISIBLE : View.VISIBLE}"
             app:layout_constraintStart_toEndOf="@id/password_text"
             app:layout_constraintTop_toTopOf="@id/password_text" />
 
