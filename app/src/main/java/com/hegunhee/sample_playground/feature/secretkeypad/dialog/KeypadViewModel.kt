@@ -67,4 +67,8 @@ class KeypadViewModel @Inject constructor() : ViewModel(), KeypadActionHandler {
     fun onClickSealedPassword() {
         isPasswordTextSealed.value = !isPasswordTextSealed.value
     }
+
+    fun onClickPasswordClear() {
+        _password.value = ""
+    }
 }
