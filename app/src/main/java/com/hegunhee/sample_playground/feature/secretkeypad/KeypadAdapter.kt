@@ -6,12 +6,14 @@ import androidx.recyclerview.widget.DiffUtil.ItemCallback
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.hegunhee.sample_playground.databinding.ItemKeypadBinding
+import com.hegunhee.sample_playground.feature.secretkeypad.dialog.KeypadActionHandler
 
-class KeypadAdapter() : ListAdapter<String,KeypadAdapter.KeypadViewHolder>(diff_util) {
+class KeypadAdapter(private val actionHandler : KeypadActionHandler) : ListAdapter<String,KeypadAdapter.KeypadViewHolder>(diff_util) {
 
     inner class KeypadViewHolder(private val binding : ItemKeypadBinding) : ViewHolder(binding.root) {
         fun bind(keypad : String) {
             binding.keypadText = keypad
+            binding.actionHandler = actionHandler
         }
     }
 

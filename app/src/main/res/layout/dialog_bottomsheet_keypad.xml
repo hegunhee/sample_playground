@@ -5,6 +5,10 @@
 
     <data>
 
+        <variable
+            name="viewModel"
+            type="com.hegunhee.sample_playground.feature.secretkeypad.dialog.KeypadViewModel" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -24,15 +28,16 @@
 
         <TextView
             android:id="@+id/password_text"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/password_input_size"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/keypad_title"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            android:text="@{viewModel.passwordText}"
             android:layout_marginTop="@dimen/big_margin"
             android:padding="@dimen/middle_padding"
             android:gravity="center"
-            tools:text="341892"
+            tools:text="222222"
             android:textSize="20sp" />
 
         <ImageView
@@ -53,6 +58,7 @@
             app:layout_constraintTop_toBottomOf="@id/password_text"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
