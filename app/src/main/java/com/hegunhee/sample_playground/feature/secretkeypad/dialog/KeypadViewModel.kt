@@ -47,7 +47,7 @@ class KeypadViewModel @Inject constructor() : ViewModel(), KeypadActionHandler {
     private fun combineData() = viewModelScope.launch {
         passwordText = password.combine(isPasswordTextSealed) { pw, sealed ->
             return@combine if (sealed) {
-                pw.map { '*' }.toString()
+                "*".repeat(pw.length)
             } else {
                 pw
             }
@@ -62,5 +62,9 @@ class KeypadViewModel @Inject constructor() : ViewModel(), KeypadActionHandler {
         }else{
             _password.value = currentPassword + keypad
         }
+    }
+
+    fun onClickSealedPassword() {
+        isPasswordTextSealed.value = !isPasswordTextSealed.value
     }
 }
