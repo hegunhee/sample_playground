@@ -31,6 +31,7 @@ class KeypadBottomSheetDialogFragment(val keypadType : KeypadType) : BottomSheet
         keypadAdapter = KeypadAdapter(viewModel)
         val root = inflater.inflate(R.layout.dialog_bottomsheet_keypad,container,false)
         viewDataBinding = DialogBottomsheetKeypadBinding.bind(root).apply {
+            keypadTitle.text = this@KeypadBottomSheetDialogFragment.keypadType.name
             viewModel = this@KeypadBottomSheetDialogFragment.viewModel
             lifecycleOwner = viewLifecycleOwner
             keypadRecyclerView.apply {
