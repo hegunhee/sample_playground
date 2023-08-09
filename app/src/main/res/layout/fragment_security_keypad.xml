@@ -41,6 +41,7 @@
             android:layout_height="wrap_content"
             android:padding="10dp"
             android:text="@string/password_check"
+            android:onClick="@{() -> viewModel.onPasswordCheckButtonClick()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

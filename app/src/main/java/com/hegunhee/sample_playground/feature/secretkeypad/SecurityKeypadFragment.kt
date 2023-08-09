@@ -61,7 +61,7 @@ class SecurityKeypadFragment : Fragment() {
                                 KeypadBottomSheetDialogFragment.getInstance(type).show(parentFragmentManager, KeypadBottomSheetDialogFragment.TAG_REGISTER)
                             }
                             is KeypadType.Check -> {
-
+                                KeypadBottomSheetDialogFragment.getInstance(type).show(parentFragmentManager,KeypadBottomSheetDialogFragment.TAG_CHECK)
                             }
                         }
                     }

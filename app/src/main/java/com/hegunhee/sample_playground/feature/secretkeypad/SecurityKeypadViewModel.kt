@@ -27,6 +27,19 @@ class SecurityKeypadViewModel @Inject constructor() : ViewModel() {
         }
     }
 
+    fun onPasswordCheckButtonClick() = viewModelScope.launch{
+        passwordState.value.let { state ->
+            when(state){
+                is PasswordState.Init -> {
+
+                }
+                is PasswordState.Setting -> {
+                    _keypadNavigation.emit(KeypadType.Check(currentPassword = state.password))
+                }
+            }
+        }
+    }
+
     fun setPassword(password : String) {
         _passwordState.value = PasswordState.Setting(password)
     }
