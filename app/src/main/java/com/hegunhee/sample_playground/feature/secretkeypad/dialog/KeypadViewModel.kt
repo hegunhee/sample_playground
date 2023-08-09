@@ -87,14 +87,16 @@ class KeypadViewModel @Inject constructor() : ViewModel(), KeypadActionHandler {
         viewModelScope.launch {
             when(type) {
                 is KeypadType.Register -> {
+                    _toastMessage.emit("비밀번호가 ${password}로 설정되었습니다")
                     _matchedPassword.emit(password)
                 }
                 is KeypadType.Check -> {
                     if(password == type.currentPassword){
+                        _toastMessage.emit("인증번호가 맞습니다.")
                         _matchedPassword.emit(password)
                     }else{
                         _password.value = ""
-                        _toastMessage.emit("비밀번호가 틀립니다.")
+                        _toastMessage.emit("인증번호가 틀립니다.")
                     }
                 }
             }
