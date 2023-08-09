@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
+import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -41,7 +43,7 @@ class KeypadBottomSheetDialogFragment(val keypadType : KeypadType) : BottomSheet
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         observeData()
-        viewModel.fetchData()
+        viewModel.fetchData(keypadType)
     }
 
     private fun observeData() {
@@ -52,13 +54,36 @@ class KeypadBottomSheetDialogFragment(val keypadType : KeypadType) : BottomSheet
                         keypadAdapter.submitList(keypad)
                     }
                 }
+                launch {
+                    viewModel.matchedPassword.collect {password ->
+                        passwordIsMatched(password)
+                    }
+                }
             }
         }
+    }
+
+    private fun passwordIsMatched(password : String) {
+        when(keypadType) {
+            is KeypadType.Register -> {
+                setFragmentResult(TAG_REGISTER,password)
+            }
+            is KeypadType.Check -> {
+                setFragmentResult(TAG_CHECK,password)
+            }
+        }
+        dismissAllowingStateLoss()
+    }
+
+    private fun setFragmentResult(requestKey : String, password : String) {
+        parentFragmentManager.setFragmentResult(requestKey,bundleOf(KEY_PASSWORD to password))
     }
 
     companion object {
         const val TAG_REGISTER = "register"
         const val TAG_CHECK = "check"
+
+        const val KEY_PASSWORD = "password_key"
 
         fun getInstance(type : KeypadType) : KeypadBottomSheetDialogFragment {
             return KeypadBottomSheetDialogFragment(keypadType = type)
