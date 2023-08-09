@@ -37,6 +37,9 @@ class KeypadViewModel @Inject constructor() : ViewModel(), KeypadActionHandler {
     private val _matchedPassword : MutableSharedFlow<String> = MutableSharedFlow()
     val matchedPassword : SharedFlow<String> = _matchedPassword.asSharedFlow()
 
+    private val _toastMessage : MutableSharedFlow<String> = MutableSharedFlow()
+    val toastMessage : SharedFlow<String> = _toastMessage
+
     fun fetchData(type : KeypadType) {
         _keypadType.value = type
         fetchKeypad()
@@ -91,6 +94,7 @@ class KeypadViewModel @Inject constructor() : ViewModel(), KeypadActionHandler {
                         _matchedPassword.emit(password)
                     }else{
                         _password.value = ""
+                        _toastMessage.emit("비밀번호가 틀립니다.")
                     }
                 }
             }
