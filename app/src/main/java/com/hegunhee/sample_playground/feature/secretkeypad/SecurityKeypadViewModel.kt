@@ -23,7 +23,7 @@ class SecurityKeypadViewModel @Inject constructor() : ViewModel() {
 
     fun onPasswordRegisterButtonClick() {
         viewModelScope.launch {
-            _keypadNavigation.emit(KeypadType.Register())
+            _keypadNavigation.emit(KeypadType.Register)
         }
     }
 

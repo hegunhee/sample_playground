@@ -1,8 +1,8 @@
 package com.hegunhee.sample_playground.feature.secretkeypad
 
-sealed class KeypadType() {
+sealed class KeypadType(val name : String) {
 
-    data class Register(val name : String = "인증번호 등록") : KeypadType()
+    object Register : KeypadType("인증번호 등록")
 
-    data class Check(val name : String = "인증번호 확인", val currentPassword : String) : KeypadType()
+    data class Check(val currentPassword : String) : KeypadType("인증번호 확인")
 }

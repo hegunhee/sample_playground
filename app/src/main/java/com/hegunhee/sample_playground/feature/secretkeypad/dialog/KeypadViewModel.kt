@@ -21,7 +21,7 @@ class KeypadViewModel @Inject constructor() : ViewModel(), KeypadActionHandler {
     private val keypadDelIndex = 9
     private val keypadDel = "del"
 
-    private val _keypadType : MutableStateFlow<KeypadType> = MutableStateFlow(KeypadType.Register())
+    private val _keypadType : MutableStateFlow<KeypadType> = MutableStateFlow(KeypadType.Register)
     val keypadType : StateFlow<KeypadType> = _keypadType.asStateFlow()
 
     private val _keypad : MutableStateFlow<List<String>> = MutableStateFlow(emptyList())
