@@ -72,6 +72,9 @@ class SecurityKeypadViewModel @Inject constructor() : ViewModel() {
         val log = "등록 ${getCurrentDate()} $password"
     }
 
+    fun addCheckPasswordLog(password : String) {
+        val log = "확인 ${getCurrentDate()} $password"
+    }
     private fun getCurrentDate() : String {
         val simpleDateFormat = SimpleDateFormat("MM:dd HH:mm:ss")
         return simpleDateFormat.format(Date(System.currentTimeMillis()))
