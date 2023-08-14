@@ -47,13 +47,15 @@ class SecurityKeypadFragment : Fragment() {
     private fun setResultListener() {
         setFragmentResultListener(KeypadBottomSheetDialogFragment.TAG_REGISTER) { _, bundle ->
             bundle.getString(KeypadBottomSheetDialogFragment.KEY_PASSWORD)?.let {
-                viewModel.setPassword(it)
-                viewModel.addRegisterPasswordLog(it)
+                viewModel.apply {
+                    setPassword(it)
+                    addRegisterPasswordLog(it)
+                }
             }
         }
         setFragmentResultListener(KeypadBottomSheetDialogFragment.TAG_CHECK) { _ , bundle ->
             bundle.getString(KeypadBottomSheetDialogFragment.KEY_PASSWORD)?.let{
-                it
+                viewModel.addCheckPasswordLog(it)
             }
         }
     }
