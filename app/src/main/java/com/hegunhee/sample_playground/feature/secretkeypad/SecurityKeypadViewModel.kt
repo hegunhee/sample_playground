@@ -33,6 +33,9 @@ class SecurityKeypadViewModel @Inject constructor() : ViewModel() {
     private val _logList : MutableStateFlow<List<String>> = MutableStateFlow(emptyList())
     val logList : StateFlow<List<String>> = _logList.asStateFlow()
 
+    private val _navigateLogUi : MutableSharedFlow<Unit> = MutableSharedFlow()
+    val navigateLogUi : SharedFlow<Unit> = _navigateLogUi.asSharedFlow()
+
 
 
     fun onPasswordRegisterButtonClick() {
@@ -65,6 +68,10 @@ class SecurityKeypadViewModel @Inject constructor() : ViewModel() {
                 }
             }
         }
+    }
+
+    fun onNavigateLogClick() = viewModelScope.launch {
+        _navigateLogUi.emit(Unit)
     }
 
     fun setPassword(password : String) {

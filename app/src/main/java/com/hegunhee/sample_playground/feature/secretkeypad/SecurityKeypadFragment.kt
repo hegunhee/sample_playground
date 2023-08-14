@@ -80,6 +80,11 @@ class SecurityKeypadFragment : Fragment() {
                         Toast.makeText(requireContext(),message, Toast.LENGTH_SHORT).show()
                     }
                 }
+                launch {
+                    viewModel.navigateLogUi.collect {
+                        val logList = viewModel.logList.value
+                    }
+                }
             }
         }
     }
