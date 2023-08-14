@@ -12,6 +12,10 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.time.ZoneId
+import java.util.Date
 import javax.inject.Inject
 
 @HiltViewModel
@@ -63,5 +67,16 @@ class SecurityKeypadViewModel @Inject constructor() : ViewModel() {
     fun setPassword(password : String) {
         _passwordState.value = PasswordState.Setting(password)
     }
+
+    fun addRegisterPasswordLog(password : String) {
+        val log = "등록 ${getCurrentDate()} $password"
+    }
+
+    private fun getCurrentDate() : String {
+        val simpleDateFormat = SimpleDateFormat("MM:dd HH:mm:ss")
+        return simpleDateFormat.format(Date(System.currentTimeMillis()))
+    }
+
+
 
 }
