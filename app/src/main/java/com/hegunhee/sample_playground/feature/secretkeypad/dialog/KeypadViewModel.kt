@@ -7,6 +7,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -32,7 +33,17 @@ class KeypadViewModel @Inject constructor() : ViewModel(), KeypadActionHandler {
 
     private val isPasswordTextSealed : MutableStateFlow<Boolean> = MutableStateFlow(false)
 
-    var passwordText : StateFlow<String> = MutableStateFlow("")
+    val passwordText : StateFlow<String> = password.combine(isPasswordTextSealed) { pw, sealed ->
+        return@combine if (sealed) {
+            "*".repeat(pw.length)
+        } else {
+            pw
+        }
+    }.stateIn(
+        initialValue = "",
+        scope = viewModelScope,
+        started = SharingStarted.WhileSubscribed(5000L)
+    )
 
     private val _matchedPassword : MutableSharedFlow<String> = MutableSharedFlow()
     val matchedPassword : SharedFlow<String> = _matchedPassword.asSharedFlow()
@@ -43,7 +54,6 @@ class KeypadViewModel @Inject constructor() : ViewModel(), KeypadActionHandler {
     fun fetchData(type : KeypadType) {
         _keypadType.value = type
         fetchKeypad()
-        combineData()
     }
 
     private fun fetchKeypad() {
@@ -58,15 +68,6 @@ class KeypadViewModel @Inject constructor() : ViewModel(), KeypadActionHandler {
         }
     }
 
-    private fun combineData() = viewModelScope.launch {
-        passwordText = password.combine(isPasswordTextSealed) { pw, sealed ->
-            return@combine if (sealed) {
-                "*".repeat(pw.length)
-            } else {
-                pw
-            }
-        }.stateIn(viewModelScope)
-    }
     override fun onClickKeypad(keypad: String) {
         val currentPassword = password.value
         if(keypad == keypadDel) {
