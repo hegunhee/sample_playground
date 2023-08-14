@@ -30,6 +30,9 @@ class SecurityKeypadViewModel @Inject constructor() : ViewModel() {
     private val _toastMessage : MutableSharedFlow<String> = MutableSharedFlow()
     val toastMessage : SharedFlow<String> = _toastMessage.asSharedFlow()
 
+    private val _logList : MutableStateFlow<List<String>> = MutableStateFlow(emptyList())
+    val logList : StateFlow<List<String>> = _logList.asStateFlow()
+
 
 
     fun onPasswordRegisterButtonClick() {
@@ -70,10 +73,12 @@ class SecurityKeypadViewModel @Inject constructor() : ViewModel() {
 
     fun addRegisterPasswordLog(password : String) {
         val log = "등록 ${getCurrentDate()} $password"
+        _logList.value = _logList.value + log
     }
 
     fun addCheckPasswordLog(password : String) {
         val log = "확인 ${getCurrentDate()} $password"
+        _logList.value = _logList.value + log
     }
     private fun getCurrentDate() : String {
         val simpleDateFormat = SimpleDateFormat("MM:dd HH:mm:ss")
