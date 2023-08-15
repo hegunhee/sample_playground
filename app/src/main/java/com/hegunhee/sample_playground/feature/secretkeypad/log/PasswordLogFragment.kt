@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.hegunhee.sample_playground.R
@@ -15,6 +16,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class PasswordLogFragment : Fragment() {
 
     private lateinit var viewDataBinding : FragmentPasswordLogBinding
+    private val viewModel : PasswordLogViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -29,8 +31,8 @@ class PasswordLogFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         arguments?.let {
-            it.getStringArray(argKey).let{
-                it
+            it.getStringArray(argKey)?.map { toString() }?.let{ logList ->
+                viewModel.fetchData(logList)
             }
         }
         viewDataBinding.toolbar.setupWithNavController(findNavController())
