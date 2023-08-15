@@ -16,6 +16,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.hegunhee.sample_playground.R
 import com.hegunhee.sample_playground.databinding.FragmentSecurityKeypadBinding
 import com.hegunhee.sample_playground.feature.secretkeypad.dialog.KeypadBottomSheetDialogFragment
+import com.hegunhee.sample_playground.feature.secretkeypad.log.PasswordLogFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -83,6 +84,10 @@ class SecurityKeypadFragment : Fragment() {
                 launch {
                     viewModel.navigateLogUi.collect {
                         val logList = viewModel.logList.value
+                        val bundle = Bundle().apply {
+                            putStringArray(PasswordLogFragment.argKey,logList.toTypedArray())
+                        }
+                        findNavController().navigate(R.id.security_to_log,bundle)
                     }
                 }
             }
