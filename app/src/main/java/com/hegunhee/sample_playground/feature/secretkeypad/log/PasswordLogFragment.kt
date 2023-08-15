@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.setupWithNavController
 import com.hegunhee.sample_playground.R
 import com.hegunhee.sample_playground.databinding.FragmentPasswordLogBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -31,6 +33,7 @@ class PasswordLogFragment : Fragment() {
                 it
             }
         }
+        viewDataBinding.toolbar.setupWithNavController(findNavController())
     }
 
     companion object{
