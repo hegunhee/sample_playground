@@ -12,14 +12,24 @@
         <action
             android:id="@+id/action_main_to_security"
             app:destination="@id/security" />
-        .
+
     </fragment>
 
 
     <fragment
         android:id="@+id/security"
         android:name="com.hegunhee.sample_playground.feature.secretkeypad.SecurityKeypadFragment"
-        android:label="@string/security_keypad" />
+        android:label="@string/security_keypad" >
+
+        <action
+            android:id="@+id/security_to_log"
+            app:destination="@id/passwordLogFragment"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/passwordLogFragment"
+        android:name="com.hegunhee.sample_playground.feature.secretkeypad.log.PasswordLogFragment"
+        android:label="PasswordLogFragment" />
 
 
 </navigation>
