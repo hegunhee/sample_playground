@@ -29,7 +29,7 @@
     <fragment
         android:id="@+id/passwordLogFragment"
         android:name="com.hegunhee.sample_playground.feature.secretkeypad.log.PasswordLogFragment"
-        android:label="PasswordLogFragment" />
+        android:label="@string/password_log" />
 
 
 </navigation>

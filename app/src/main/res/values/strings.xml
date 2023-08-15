@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">sample_playground</string>
     <string name="security_keypad">보안키패드</string>
+    <string name="password_log">인증번호 로그</string>
     <string name="password_register">인증번호 등록</string>
     <string name="password_check">인증번호 검사</string>
     <string name="password_show">인증번호 확인</string>
