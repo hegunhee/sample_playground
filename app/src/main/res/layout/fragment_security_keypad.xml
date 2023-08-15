@@ -21,7 +21,17 @@
             android:layout_height="?attr/actionBarSize"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent" >
+
+            <ImageButton
+                android:id="@+id/password_log_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_log_24"
+                android:layout_gravity="end"
+                android:onClick="@{() -> viewModel.onNavigateLogClick()}" />
+
+        </androidx.appcompat.widget.Toolbar>
 
         <Button
             android:id="@+id/password_show_button"
@@ -59,14 +69,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/password_register_button"
             android:textSize="@dimen/middle_text_size"/>
-
-        <Button
-            android:id="@+id/password_log_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:onClick="@{() -> viewModel.onNavigateLogClick()}"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
