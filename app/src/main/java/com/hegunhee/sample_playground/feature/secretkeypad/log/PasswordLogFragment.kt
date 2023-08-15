@@ -24,7 +24,9 @@ class PasswordLogFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val root = inflater.inflate(R.layout.fragment_password_log,container,false)
-        viewDataBinding = FragmentPasswordLogBinding.bind(root)
+        viewDataBinding = FragmentPasswordLogBinding.bind(root).apply {
+            viewModel = this@PasswordLogFragment.viewModel
+        }
         return root
     }
 
