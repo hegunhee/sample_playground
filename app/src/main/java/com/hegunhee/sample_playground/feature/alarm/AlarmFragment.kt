@@ -1,9 +1,7 @@
 package com.hegunhee.sample_playground.feature.alarm
 
 import android.app.AlarmManager
-import android.app.PendingIntent
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,10 +11,11 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.hegunhee.sample_playground.R
 import com.hegunhee.sample_playground.broadcast.AlarmReceiver
+import com.hegunhee.sample_playground.broadcast.AlarmReceiver.Companion.SECOND_ALARM_PENDING_INTENT_FLAG
+import com.hegunhee.sample_playground.broadcast.AlarmType
 import com.hegunhee.sample_playground.databinding.FragmentAlarmBinding
 import com.hegunhee.sample_playground.util.Time
 import dagger.hilt.android.AndroidEntryPoint
-import java.time.LocalDateTime
 
 @AndroidEntryPoint
 class AlarmFragment : Fragment() {
@@ -44,23 +43,35 @@ class AlarmFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        viewDataBinding.alarmSendButton.setOnClickListener {
-            val second = viewDataBinding.alarmEditText.text.toString()
-            if(second.isNullOrEmpty()) {
-                Toast.makeText(requireContext(), "초를 입력해주세요", Toast.LENGTH_SHORT).show()
-                viewDataBinding.alarmEditText.requestFocus()
-                inputMethodManager.showSoftInput(viewDataBinding.alarmEditText,InputMethodManager.SHOW_IMPLICIT)
-            }else {
-                registerAlarm(second.toLong())
-            }
+        viewDataBinding.run {
+            setSecondAlarm()
         }
     }
 
-    private fun registerAlarm(second : Long) {
-        val intent = Intent(requireContext(), AlarmReceiver::class.java)
-        val pendingIntent = PendingIntent.getBroadcast(requireContext(),0,intent,PendingIntent.FLAG_IMMUTABLE)
+    private fun FragmentAlarmBinding.setSecondAlarm() {
+        secondAlarmSendButton.setOnClickListener {
+            val second = secondAlarmEditText.text.toString()
+            if(second.isNullOrEmpty()) {
+                Toast.makeText(requireContext(), "초를 입력해주세요", Toast.LENGTH_SHORT).show()
+                secondAlarmEditText.requestFocus()
+                inputMethodManager.showSoftInput(secondAlarmEditText,InputMethodManager.SHOW_IMPLICIT)
+            }else {
+                registerSecondAlarm(second.toLong())
+            }
+        }
+        cancelSecondAlarmButton.setOnClickListener {
+            cancelSecondAlarm()
+        }
+    }
+
+    private fun registerSecondAlarm(second : Long) {
+        val pendingIntent = AlarmReceiver.getAlarmPendingIntent(requireContext(),AlarmType.SECOND,SECOND_ALARM_PENDING_INTENT_FLAG)
         val timeMills = Time.toTimeMills(second)
         alarmManager.set(AlarmManager.RTC,timeMills,pendingIntent)
+    }
+
+    private fun cancelSecondAlarm() {
+        val pendingIntent = AlarmReceiver.getAlarmPendingIntent(requireContext(),AlarmType.SECOND,SECOND_ALARM_PENDING_INTENT_FLAG)
+        alarmManager.cancel(pendingIntent)
     }
 }

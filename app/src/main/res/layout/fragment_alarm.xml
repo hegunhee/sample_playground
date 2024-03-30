@@ -22,7 +22,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
-            android:id="@+id/alarmEditText"
+            android:id="@+id/secondAlarmEditText"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:hint="초를 입력해주세요"
@@ -32,11 +32,19 @@
             app:layout_constraintTop_toBottomOf="@id/alarmDescText" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/alarmSendButton"
+            android:id="@+id/secondAlarmSendButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="보내기"
-            app:layout_constraintStart_toEndOf="@id/alarmEditText"
+            app:layout_constraintStart_toEndOf="@id/secondAlarmEditText"
             app:layout_constraintTop_toBottomOf="@id/alarmDescText" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/cancelSecondAlarmButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="알람 취소하기"
+            app:layout_constraintTop_toBottomOf="@id/secondAlarmSendButton"
+            app:layout_constraintStart_toStartOf="@id/secondAlarmSendButton" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
