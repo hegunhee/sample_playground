@@ -8,6 +8,7 @@ data class MainNavItem(val name : String,val actionId : Int)
 
 internal fun getNavActionList() : List<MainNavItem> {
     return listOf<MainNavItem>(
-        MainNavItem(name = "보안키패드",actionId = R.id.action_main_to_security)
+        MainNavItem(name = "보안키패드",actionId = R.id.main_to_security),
+        MainNavItem(name = "알람매니저",actionId = R.id.main_to_alarm)
     )
 }
