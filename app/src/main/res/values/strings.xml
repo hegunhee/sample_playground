@@ -6,4 +6,6 @@
     <string name="password_check">인증번호 검사</string>
     <string name="password_show">인증번호 확인</string>
     <string name="empty_log">로그가 없습니다.</string>
+
+    <string name="alarm_fragment">알람 화면</string>
 </resources>

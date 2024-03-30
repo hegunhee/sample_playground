@@ -10,8 +10,11 @@
         android:label="MainFragment" >
 
         <action
-            android:id="@+id/action_main_to_security"
+            android:id="@+id/main_to_security"
             app:destination="@id/security" />
+        <action
+            android:id="@+id/main_to_alarm"
+            app:destination="@id/alarmFragment" />
 
     </fragment>
 
@@ -30,6 +33,11 @@
         android:id="@+id/passwordLogFragment"
         android:name="com.hegunhee.sample_playground.feature.secretkeypad.log.PasswordLogFragment"
         android:label="@string/password_log" />
+
+    <fragment
+        android:id="@+id/alarmFragment"
+        android:name="com.hegunhee.sample_playground.feature.alarm.AlarmFragment"
+        android:label="@string/alarm_fragment" />
 
 
 </navigation>
