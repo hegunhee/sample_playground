@@ -11,13 +11,32 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/header"
+            android:id="@+id/alarmDescText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="100dp"
+            android:text="알람이 전송됩니다."
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:text="Alarm Fragment"
-            android:textSize="13sp" />
+            app:layout_constraintTop_toTopOf="parent" />
 
+        <EditText
+            android:id="@+id/alarmEditText"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:hint="초를 입력해주세요"
+            android:inputType="number"
+            android:textSize="13sp"
+            app:layout_constraintStart_toStartOf="@id/alarmDescText"
+            app:layout_constraintTop_toBottomOf="@id/alarmDescText" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/alarmSendButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="보내기"
+            app:layout_constraintStart_toEndOf="@id/alarmEditText"
+            app:layout_constraintTop_toBottomOf="@id/alarmDescText" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
