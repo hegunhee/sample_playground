@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.hegunhee.sample_playground.R
@@ -24,6 +26,8 @@ class AlarmFragment : Fragment() {
     private val inputMethodManager : InputMethodManager by lazy {
         requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
     }
+
+    private var repeatTime : String = "0:00"
 
     private val alarmManager : AlarmManager by lazy {
         requireContext().getSystemService(Context.ALARM_SERVICE) as AlarmManager
@@ -43,8 +47,12 @@ class AlarmFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val spinnerAdpater = ArrayAdapter(requireContext(), androidx.transition.R.layout.support_simple_spinner_dropdown_item,Time.getTimeList())
+        viewDataBinding.timeSpinner.adapter = spinnerAdpater
         viewDataBinding.run {
             setSecondAlarm()
+            spinnerListener()
+            setRepeatAlarm()
         }
     }
 
@@ -61,6 +69,26 @@ class AlarmFragment : Fragment() {
         }
         cancelSecondAlarmButton.setOnClickListener {
             cancelSecondAlarm()
+        }
+    }
+
+    private fun FragmentAlarmBinding.spinnerListener() {
+        timeSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, position: Int, p3: Long) {
+                repeatTime = Time.getTimeList()[position]
+                Toast.makeText(requireContext(), Time.getTimeList()[position], Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) { }
+        }
+    }
+
+    private fun FragmentAlarmBinding.setRepeatAlarm() {
+        repeatButton.setOnClickListener {
+            Toast.makeText(requireContext(), repeatTime, Toast.LENGTH_SHORT).show()
+        }
+        repeatCancelButton.setOnClickListener {
+            
         }
     }
 
