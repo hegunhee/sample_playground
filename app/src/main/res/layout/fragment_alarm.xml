@@ -44,7 +44,39 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="알람 취소하기"
-            app:layout_constraintTop_toBottomOf="@id/secondAlarmSendButton"
-            app:layout_constraintStart_toStartOf="@id/secondAlarmSendButton" />
+            app:layout_constraintStart_toStartOf="@id/secondAlarmSendButton"
+            app:layout_constraintTop_toBottomOf="@id/secondAlarmSendButton" />
+
+        <TextView
+            android:id="@+id/repeatDescText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="반복되는 시간을 설정해주세요"
+            app:layout_constraintStart_toStartOf="@id/alarmDescText"
+            app:layout_constraintTop_toBottomOf="@id/cancelSecondAlarmButton" />
+
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/timeSpinner"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:paddingVertical="10dp"
+            app:layout_constraintStart_toStartOf="@id/repeatDescText"
+            app:layout_constraintTop_toBottomOf="@id/repeatDescText" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/repeatButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="등록하기"
+            app:layout_constraintStart_toEndOf="@id/timeSpinner"
+            app:layout_constraintTop_toBottomOf="@id/repeatDescText" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/repeatCancelButton"
+            android:layout_width="wrap_content"
+            android:text="취소하기"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/repeatButton"
+            app:layout_constraintTop_toBottomOf="@id/repeatButton" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
