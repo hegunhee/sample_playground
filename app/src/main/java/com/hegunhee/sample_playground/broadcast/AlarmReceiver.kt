@@ -6,8 +6,10 @@ import android.app.PendingIntent
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import com.hegunhee.sample_playground.R
+import com.hegunhee.sample_playground.broadcast.AlarmReceiver.Companion.ALARM_REPEAT
 import com.hegunhee.sample_playground.broadcast.AlarmReceiver.Companion.ALARM_SECOND
 import com.hegunhee.sample_playground.feature.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -23,10 +25,10 @@ class AlarmReceiver : BroadcastReceiver() {
         val strExtra = intent.getStringExtra(ALARM_EXTRA_KEY) ?: ""
         when(strExtra) {
             ALARM_SECOND -> {
-                sendNotification(context)
+                sendNotification(context,"몇초후 알람입니다.","내용 입니다.")
             }
-            else -> {
-
+            ALARM_REPEAT -> {
+                sendNotification(context,"오늘의 반복 알람입니다.","반복반복")
             }
         }
     }
@@ -42,7 +44,7 @@ class AlarmReceiver : BroadcastReceiver() {
         }
     }
 
-    private fun sendNotification(context : Context) {
+    private fun sendNotification(context : Context,title : String, content : String) {
         val contentIntent = Intent(context,MainActivity::class.java)
         val contentPendingIntent = PendingIntent.getActivity(
             context,
@@ -52,8 +54,8 @@ class AlarmReceiver : BroadcastReceiver() {
         )
         val builder =NotificationCompat.Builder(context, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_check_circle_24)
-            .setContentTitle("타이틀입니다.")
-            .setContentText("내용 입니다.")
+            .setContentTitle(title)
+            .setContentText(content)
             .setContentIntent(contentPendingIntent)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .setAutoCancel(true)
@@ -63,9 +65,13 @@ class AlarmReceiver : BroadcastReceiver() {
     companion object {
         const val SECOND_ALARM_PENDING_INTENT_FLAG = 1
 
+        const val REPEAT_ALARM_PENDING_INTENT_FLAG = 2
+
         private const val ALARM_EXTRA_KEY = "ALARM"
 
         const val ALARM_SECOND = "SECOND"
+
+        const val ALARM_REPEAT = "REPEAT"
 
         private const val CHANNEL_ID = "테스트 알람 채널 id"
 
@@ -87,5 +93,5 @@ class AlarmReceiver : BroadcastReceiver() {
 }
 
 enum class AlarmType(name : String) {
-    SECOND(name = ALARM_SECOND);
+    SECOND(name = ALARM_SECOND), REPEAT(name = ALARM_REPEAT)
 }
