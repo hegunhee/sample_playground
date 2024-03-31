@@ -13,6 +13,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.hegunhee.sample_playground.R
 import com.hegunhee.sample_playground.broadcast.AlarmReceiver
+import com.hegunhee.sample_playground.broadcast.AlarmReceiver.Companion.REPEAT_ALARM_PENDING_INTENT_FLAG
 import com.hegunhee.sample_playground.broadcast.AlarmReceiver.Companion.SECOND_ALARM_PENDING_INTENT_FLAG
 import com.hegunhee.sample_playground.broadcast.AlarmType
 import com.hegunhee.sample_playground.databinding.FragmentAlarmBinding
@@ -68,7 +69,7 @@ class AlarmFragment : Fragment() {
             }
         }
         cancelSecondAlarmButton.setOnClickListener {
-            cancelSecondAlarm()
+            cancelAlarm(AlarmType.SECOND,SECOND_ALARM_PENDING_INTENT_FLAG)
         }
     }
 
@@ -85,10 +86,11 @@ class AlarmFragment : Fragment() {
 
     private fun FragmentAlarmBinding.setRepeatAlarm() {
         repeatButton.setOnClickListener {
-            Toast.makeText(requireContext(), repeatTime, Toast.LENGTH_SHORT).show()
+            val (hour,minute) = repeatTime.split(":").map{it.toInt()}
+            registerRepeatAlarm(hour,minute)
         }
         repeatCancelButton.setOnClickListener {
-            
+            cancelAlarm(AlarmType.REPEAT, REPEAT_ALARM_PENDING_INTENT_FLAG)
         }
     }
 
@@ -98,8 +100,14 @@ class AlarmFragment : Fragment() {
         alarmManager.set(AlarmManager.RTC,timeMills,pendingIntent)
     }
 
-    private fun cancelSecondAlarm() {
-        val pendingIntent = AlarmReceiver.getAlarmPendingIntent(requireContext(),AlarmType.SECOND,SECOND_ALARM_PENDING_INTENT_FLAG)
+    private fun cancelAlarm(alarmType: AlarmType,intentPlag : Int) {
+        val pendingIntent = AlarmReceiver.getAlarmPendingIntent(requireContext(),alarmType,intentPlag)
         alarmManager.cancel(pendingIntent)
+    }
+
+    private fun registerRepeatAlarm(hour : Int,minute : Int) {
+        val pendingIntent = AlarmReceiver.getAlarmPendingIntent(requireContext(),AlarmType.REPEAT, REPEAT_ALARM_PENDING_INTENT_FLAG)
+        Toast.makeText(requireContext(), "${hour}시 ${minute}분에 울릴 예정입니다.", Toast.LENGTH_SHORT).show()
+        alarmManager.setRepeating(AlarmManager.RTC,Time.toTimeMills(hour = hour,minute = minute),AlarmManager.INTERVAL_DAY,pendingIntent)
     }
 }
