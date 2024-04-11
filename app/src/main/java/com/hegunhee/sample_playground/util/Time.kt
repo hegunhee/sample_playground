@@ -12,7 +12,7 @@ object Time {
     }
 
     fun toTimeMills(hour : Int,minute : Int) : Long {
-        return LocalDateTime.of(currentTime.year, currentTime.monthValue, currentTime.dayOfMonth,hour,minute).atZone(ZoneId.systemDefault()).toInstant().epochSecond
+        return LocalDateTime.now().withHour(hour).withMinute(minute).atZone(ZoneId.systemDefault()).toInstant().epochSecond
     }
 
     fun getTimeList(): List<String> {

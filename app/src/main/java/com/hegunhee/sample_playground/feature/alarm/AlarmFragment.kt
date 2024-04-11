@@ -77,7 +77,6 @@ class AlarmFragment : Fragment() {
         timeSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, position: Int, p3: Long) {
                 repeatTime = Time.getTimeList()[position]
-                Toast.makeText(requireContext(), Time.getTimeList()[position], Toast.LENGTH_SHORT).show()
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) { }
